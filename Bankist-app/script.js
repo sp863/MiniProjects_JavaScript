@@ -211,3 +211,17 @@ btnSort.addEventListener("click", function (e) {
   displayMovements(currentAccount.movements, !sorted);
   sorted = !sorted;
 });
+
+/*
+// Selecting all elements with a class named .movements__value FROM the UI
+//Query Selector All returns a nodelist not a real array
+labelBalance.addEventListener("click", function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll(".movements__value"), //querySelectorAll is not an array but a nodelist, an array like sturcture
+    (el) => Number(el.textContent.replace("€", ""))
+  );
+  console.log(movementsUI);
+
+  const movementsUI2 = [...document.querySelectorAll(".movements__value")];
+});
+*/
