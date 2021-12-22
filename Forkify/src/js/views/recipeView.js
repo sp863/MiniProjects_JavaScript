@@ -7,7 +7,7 @@ class RecipeView {
 
   render(data) {
     this.#data = data;
-    const markup = this._generateMarkup();
+    const markup = this.#generateMarkup();
     this.#clear();
     this.#parentElement.insertAdjacentHTML("afterbegin", markup);
   }
@@ -27,7 +27,11 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML("afterbegin", markup);
   };
 
-  _generateMarkup() {
+  addHandlerRender(handler) {
+    ["haschange", "load"].forEach((ev) => window.addEventListener(ev, handler));
+  }
+
+  #generateMarkup() {
     return `
     <figure class="recipe__fig">
     <img src="${this.#data.image}" alt="Tomato" class="recipe__img" />

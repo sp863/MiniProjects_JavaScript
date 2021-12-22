@@ -479,16 +479,14 @@ const controlRecipes = async function() {
         // 2) Rendering recipe
         _recipeViewJsDefault.default.render(_modelJs.state.recipe);
     } catch (err) {
-        alert(err);
+        console.log(err);
     }
 };
 controlRecipes();
-[
-    "haschange",
-    "load"
-].forEach((ev)=>window.addEventListener(ev, controlRecipes)
-); // window.addEventListener("hashchange", controlRecipes);
- // window.addEventListener("load", controlRecipes);
+const init = function() {
+    _recipeViewJsDefault.default.addHandlerRender(controlRecipes);
+};
+init();
 
 },{"core-js/stable":"95FYz","regenerator-runtime/runtime":"1EBPE","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","./model.js":"1pVJj","./views/recipeView.js":"82pEw"}],"95FYz":[function(require,module,exports) {
 require('../modules/es.symbol');
@@ -14828,7 +14826,7 @@ class RecipeView {
     #data;
     render(data) {
         this.#data = data;
-        const markup = this._generateMarkup();
+        const markup = this.#generateMarkup();
         this.#clear();
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
     }
@@ -14845,7 +14843,14 @@ class RecipeView {
         this.#parentElement.innerHTML = "";
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
     };
-    _generateMarkup() {
+    addHandlerRender(handler) {
+        [
+            "haschange",
+            "load"
+        ].forEach((ev)=>window.addEventListener(ev, handler)
+        );
+    }
+     #generateMarkup() {
         return `
     <figure class="recipe__fig">
     <img src="${this.#data.image}" alt="Tomato" class="recipe__img" />
