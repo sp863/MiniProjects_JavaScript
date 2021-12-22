@@ -33,4 +33,4 @@ controlRecipes();
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
 };
-init();
+init(); //xx
